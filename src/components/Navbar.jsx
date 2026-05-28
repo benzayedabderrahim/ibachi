@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import { CATEGORIES } from '../config'
+import logo from '../assets/logo_ibachic.png'
 import LanguageSwitcher from './LanguageSwitcher'
 
 export default function Navbar() {
@@ -14,7 +15,8 @@ export default function Navbar() {
     <header className="navbar">
       <div className="navbar-inner">
         <NavLink to="/" className="brand" onClick={close}>
-          <span className="brand-mark">Iba</span>Chic
+          <img src={logo} className="brand-logo" alt="IbaChic" />
+          <span className="brand-text"><span className="brand-mark">Iba</span>Chic</span>
         </NavLink>
 
         <button

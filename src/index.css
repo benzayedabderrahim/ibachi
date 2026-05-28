@@ -91,11 +91,20 @@ h4 {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--serif);
   font-size: 26px;
   font-weight: 700;
   letter-spacing: 0.5px;
   color: var(--navy);
+}
+
+.brand-logo {
+  height: 45%;
+  width: 40%;
+  object-fit: contain;
 }
 
 .brand-mark {
