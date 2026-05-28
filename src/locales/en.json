@@ -1,0 +1,45 @@
+{
+  "brand": "IbaChic",
+  "nav": {
+    "home": "Home",
+    "women": "Women",
+    "men": "Men",
+    "kids": "Kids",
+    "accessories": "Accessories"
+  },
+  "hero": {
+    "title": "Elegance, the IbaChic way",
+    "subtitle": "Discover our curated collection of clothing and accessories for the whole family. Order directly on WhatsApp — simple and fast.",
+    "cta": "Shop the collection"
+  },
+  "categories": {
+    "women": { "title": "Women", "desc": "Refined styles for every occasion." },
+    "men": { "title": "Men", "desc": "Modern essentials and timeless pieces." },
+    "kids": { "title": "Kids", "desc": "Comfortable and playful outfits." },
+    "accessories": { "title": "Accessories", "desc": "The finishing touch to your look." },
+    "explore": "Explore"
+  },
+  "featured": "Featured products",
+  "shopByCategory": "Shop by category",
+  "product": {
+    "order": "Order on WhatsApp",
+    "reference": "Ref",
+    "unavailable": "Currently unavailable",
+    "currency": "TND",
+    "whatsappMessage": "Hello IbaChic! I'm interested in this product: {{name}} (Ref {{mat}}) — {{price}} TND. Is it available?"
+  },
+  "common": {
+    "loading": "Loading products...",
+    "error": "Could not load products. Please make sure the server is running.",
+    "empty": "No products in this category yet. Check back soon!",
+    "viewAll": "View all"
+  },
+  "footer": {
+    "tagline": "Fashion & accessories for the whole family.",
+    "contact": "Contact us",
+    "rights": "All rights reserved.",
+    "order": "Order on WhatsApp",
+    "quickLinks": "Categories"
+  },
+  "lang": { "label": "Language" }
+}
