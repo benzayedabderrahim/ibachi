@@ -17,3 +17,9 @@ export const LANGUAGES = [
   { code: 'en', label: 'English' },
   { code: 'ar', label: 'العربية' },
 ]
+
+// Social media profiles shown in the footer. Update with the real handles.
+export const SOCIAL_LINKS = {
+  facebook: 'https://www.facebook.com/ibachic',
+  tiktok: 'https://www.tiktok.com/@ibachic',
+}

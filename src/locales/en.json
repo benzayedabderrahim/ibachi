@@ -20,26 +20,31 @@
     "explore": "Explore"
   },
   "featured": "Featured products",
+  "searchResults": "Search results",
   "shopByCategory": "Shop by category",
   "product": {
     "order": "Order on WhatsApp",
     "reference": "Ref",
     "unavailable": "Currently unavailable",
     "currency": "TND",
+    "photoLabel": "Product photo",
     "whatsappMessage": "Hello IbaChic! I'm interested in this product: {{name}} (Ref {{mat}}) — {{price}} TND. Is it available?"
   },
   "common": {
     "loading": "Loading products...",
     "error": "Could not load products. Please make sure the server is running.",
     "empty": "No products in this category yet. Check back soon!",
-    "viewAll": "View all"
+    "viewAll": "View all",
+    "searchPlaceholder": "Search a product...",
+    "noResults": "No results for \"{{query}}\"."
   },
   "footer": {
     "tagline": "Fashion & accessories for the whole family.",
     "contact": "Contact us",
     "rights": "All rights reserved.",
     "order": "Order on WhatsApp",
-    "quickLinks": "Categories"
+    "quickLinks": "Categories",
+    "follow": "Follow us"
   },
   "lang": { "label": "Language" }
 }

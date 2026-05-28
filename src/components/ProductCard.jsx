@@ -1,33 +1,70 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { buildWhatsappLink } from '../api'
+import Lightbox from './Lightbox'
 
 export default function ProductCard({ product }) {
   const { t } = useTranslation()
+  const [zoomed, setZoomed] = useState(false)
 
   const price = Number(product.price).toLocaleString(undefined, {
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   })
 
-  const message = t('product.whatsappMessage', {
+  const baseMessage = t('product.whatsappMessage', {
     name: product.name,
     mat: product.mat,
     price,
   })
 
+  // wa.me links cannot attach files, so we include the photo URL in the text;
+  // WhatsApp renders a link preview when the image is publicly reachable.
+  const message = product.image
+    ? `${baseMessage}\n\n${t('product.photoLabel')}: ${product.image}`
+    : baseMessage
+
   const soldOut = !product.dispo || product.stock === 0
 
   return (
     <article className="card">
-      <div className="card-media">
-        {product.image ? (
+      {product.image ? (
+        <button
+          type="button"
+          className="card-media clickable"
+          onClick={() => setZoomed(true)}
+          aria-label={product.name}
+        >
           <img src={product.image} alt={product.name} loading="lazy" />
-        ) : (
+          <span className="card-zoom" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                d="M10 4a6 6 0 100 12 6 6 0 000-12zm4.5 10.5L20 20M10 7v6M7 10h6"
+              />
+            </svg>
+          </span>
+          {soldOut && <span className="card-badge">{t('product.unavailable')}</span>}
+        </button>
+      ) : (
+        <div className="card-media">
           <div className="card-media-placeholder">IbaChic</div>
-        )}
-        {soldOut && <span className="card-badge">{t('product.unavailable')}</span>}
-      </div>
+          {soldOut && <span className="card-badge">{t('product.unavailable')}</span>}
+        </div>
+      )}
+
+      {zoomed && (
+        <Lightbox
+          src={product.image}
+          alt={product.name}
+          caption={product.name}
+          onClose={() => setZoomed(false)}
+        />
+      )}
 
       <div className="card-body">
         <span className="card-ref">{t('product.reference')} {product.mat}</span>

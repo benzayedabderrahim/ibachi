@@ -20,26 +20,31 @@
     "explore": "اكتشف"
   },
   "featured": "منتجات مميزة",
+  "searchResults": "نتائج البحث",
   "shopByCategory": "تسوّق حسب الفئة",
   "product": {
     "order": "اطلب عبر واتساب",
     "reference": "المرجع",
     "unavailable": "غير متوفر حاليًا",
     "currency": "د.ت",
+    "photoLabel": "صورة المنتج",
     "whatsappMessage": "مرحبًا IbaChic! أنا مهتم بهذا المنتج: {{name}} (المرجع {{mat}}) — {{price}} د.ت. هل هو متوفر؟"
   },
   "common": {
     "loading": "جارٍ تحميل المنتجات...",
     "error": "تعذّر تحميل المنتجات. يرجى التأكد من تشغيل الخادم.",
     "empty": "لا توجد منتجات في هذه الفئة حاليًا. عُد قريبًا!",
-    "viewAll": "عرض الكل"
+    "viewAll": "عرض الكل",
+    "searchPlaceholder": "ابحث عن منتج...",
+    "noResults": "لا توجد نتائج لـ « {{query}} »."
   },
   "footer": {
     "tagline": "أزياء وإكسسوارات لكل أفراد العائلة.",
     "contact": "اتصل بنا",
     "rights": "جميع الحقوق محفوظة.",
     "order": "اطلب عبر واتساب",
-    "quickLinks": "الفئات"
+    "quickLinks": "الفئات",
+    "follow": "تابعنا"
   },
   "lang": { "label": "اللغة" }
 }

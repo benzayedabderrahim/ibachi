@@ -18,7 +18,6 @@ const CATEGORY_LABELS = {
 }
 
 const EMPTY_FORM = {
-  mat: '',
   name: '',
   category: 'women',
   price: '',
@@ -83,9 +82,8 @@ function ProductForm({ onCreated }) {
     setBusy(true)
     setMessage(null)
     try {
-      await createProduct(
+      const created = await createProduct(
         {
-          mat: form.mat,
           name: form.name,
           category: form.category,
           price: form.price || 0,
@@ -95,7 +93,7 @@ function ProductForm({ onCreated }) {
         },
         imageFile,
       )
-      setMessage({ type: 'ok', text: `Produit "${form.name}" ajouté.` })
+      setMessage({ type: 'ok', text: `Produit "${form.name}" ajouté — réf. ${created.mat}` })
       setForm(EMPTY_FORM)
       setImageFile(null)
       e.target.reset()
@@ -115,11 +113,10 @@ function ProductForm({ onCreated }) {
   return (
     <form className="admin-form" onSubmit={submit}>
       <h2>Ajouter un produit</h2>
+      <p className="admin-hint">
+        La référence (matricule) est générée automatiquement à partir de la catégorie et du nom.
+      </p>
       <div className="admin-grid">
-        <label>
-          Matricule (réf.)*
-          <input value={form.mat} onChange={update('mat')} required />
-        </label>
         <label>
           Nom*
           <input value={form.name} onChange={update('name')} required />
