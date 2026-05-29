@@ -5,7 +5,7 @@ import { createFeedback, fetchFeedbacks } from '../api'
 
 const NAME_LIMIT = 20
 const MESSAGE_LIMIT = 300
-const SESSION_KEY = 'iba_feedback_done'
+const DEVICE_KEY = 'iba_feedback_done'
 
 export default function FeedbackSection() {
   const { t, i18n } = useTranslation()
@@ -16,7 +16,7 @@ export default function FeedbackSection() {
   const [busy, setBusy] = useState(false)
   const [alreadySubmitted, setAlreadySubmitted] = useState(() => {
     try {
-      return Boolean(sessionStorage.getItem(SESSION_KEY))
+      return Boolean(localStorage.getItem(DEVICE_KEY))
     } catch {
       return false
     }
@@ -40,7 +40,7 @@ export default function FeedbackSection() {
       setMessage('')
       setStatus('ok')
       try {
-        sessionStorage.setItem(SESSION_KEY, '1')
+        localStorage.setItem(DEVICE_KEY, '1')
       } catch {
         /* ignore storage errors (private mode, etc.) */
       }
