@@ -42,6 +42,16 @@ export async function createProduct(fields, imageFile) {
   return data
 }
 
+// Update a product. Only includes the image when a new file is provided,
+// so leaving the file input empty keeps the existing photo.
+export async function updateProduct(id, fields, imageFile) {
+  const form = new FormData()
+  Object.entries(fields).forEach(([key, value]) => form.append(key, value))
+  if (imageFile) form.append('image', imageFile)
+  const { data } = await client.patch(`/produits/${id}/`, form, { headers: authHeader() })
+  return data
+}
+
 export async function deleteProduct(id) {
   await client.delete(`/produits/${id}/`, { headers: authHeader() })
 }

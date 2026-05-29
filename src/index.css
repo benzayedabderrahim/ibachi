@@ -988,38 +988,150 @@ button.card-media {
 
 .admin-checkbox input { width: 18px; height: 18px; }
 
+.admin-form-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.admin-cancel {
+  background: var(--cream-2);
+  color: var(--ink);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.admin-cancel:hover { background: var(--line); }
+
+.admin-note {
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.admin-current-img {
+  grid-column: 1 / -1;
+  width: 120px;
+  height: 150px;
+  object-fit: contain;
+  background: var(--cream-2);
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+
 .admin-list {
   background: var(--white);
   border-radius: var(--radius);
   padding: 28px;
   box-shadow: var(--shadow-sm);
-  overflow-x: auto;
 }
 
-.admin-list table {
+.admin-products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+  margin-top: 16px;
+}
+
+.admin-product {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+}
+
+.admin-product-thumb {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: var(--cream-2);
+}
+
+.admin-product-thumb img {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 14px;
-  font-size: 14px;
+  height: 100%;
+  object-fit: contain;
 }
 
-.admin-list th,
-.admin-list td {
-  text-align: start;
-  padding: 10px 12px;
-  border-bottom: 1px solid var(--line);
+.admin-product-noimg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  color: var(--navy);
 }
 
-.admin-list th { color: var(--muted); font-weight: 600; }
+.admin-product-badge {
+  position: absolute;
+  top: 8px;
+  inset-inline-start: 8px;
+  background: rgba(16, 24, 43, 0.85);
+  color: #fff;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+.admin-product-info {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.admin-product-ref {
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.admin-product-info strong {
+  color: var(--navy);
+  font-size: 15px;
+}
+
+.admin-product-meta {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.admin-product-actions {
+  display: flex;
+  gap: 8px;
+  padding: 0 14px 14px;
+}
+
+.admin-edit,
+.admin-del {
+  flex: 1;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.admin-edit {
+  background: var(--navy);
+  color: #fff;
+}
+
+.admin-edit:hover { background: var(--navy-soft); }
 
 .admin-del {
   background: #fdecea;
   color: #b3261e;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 13px;
 }
 
 .admin-del:hover { background: #f9d7d3; }
