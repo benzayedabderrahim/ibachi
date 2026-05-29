@@ -5,6 +5,7 @@ import { ADMIN_PATH, CATEGORIES } from './config'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import FeedbackSection from './components/FeedbackSection'
+import BackToTop from './components/BackToTop'
 import Home from './pages/Home'
 import Category from './pages/Category'
 import Admin from './pages/Admin'
@@ -32,6 +33,7 @@ function StoreLayout() {
       </main>
       <FeedbackSection />
       <Footer />
+      <BackToTop />
     </>
   )
 }
