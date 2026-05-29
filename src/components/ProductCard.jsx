@@ -29,7 +29,7 @@ export default function ProductCard({ product }) {
   const stockBadge = (
     <span className={`card-badge ${inStock ? 'in-stock' : 'out-stock'}`}>
       <span className="badge-dot" aria-hidden="true" />
-      {t(inStock ? 'product.inStock' : 'product.unavailable')}
+      {t(inStock ? 'product.inStock' : 'product.outOfStock')}
     </span>
   )
 
