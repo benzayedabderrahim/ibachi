@@ -40,6 +40,21 @@
     "searchPlaceholder": "Rechercher un produit...",
     "noResults": "Aucun résultat pour « {{query}} »."
   },
+  "feedback": {
+    "title": "Avis de nos clients",
+    "subtitle": "Vos retours nous inspirent — partagez votre expérience IbaChic.",
+    "formTitle": "Laissez un avis",
+    "namePlaceholder": "Votre nom",
+    "messagePlaceholder": "Votre message...",
+    "submit": "Envoyer",
+    "sending": "Envoi en cours...",
+    "thanks": "Merci pour votre avis !",
+    "error": "Impossible d'envoyer votre avis. Réessayez.",
+    "empty": "Soyez le premier à partager votre avis !",
+    "charsLeft": "{{n}} caractères restants",
+    "alreadyTitle": "Merci !",
+    "alreadyText": "Vous avez déjà partagé votre avis durant cette session."
+  },
   "footer": {
     "tagline": "Mode & accessoires pour toute la famille.",
     "contact": "Contactez-nous",

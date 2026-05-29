@@ -40,6 +40,21 @@
     "searchPlaceholder": "Search a product...",
     "noResults": "No results for \"{{query}}\"."
   },
+  "feedback": {
+    "title": "What our customers say",
+    "subtitle": "Your feedback inspires us — share your IbaChic experience.",
+    "formTitle": "Leave a review",
+    "namePlaceholder": "Your name",
+    "messagePlaceholder": "Your message...",
+    "submit": "Send",
+    "sending": "Sending...",
+    "thanks": "Thank you for your feedback!",
+    "error": "Couldn't send your feedback. Try again.",
+    "empty": "Be the first to share your feedback!",
+    "charsLeft": "{{n}} characters left",
+    "alreadyTitle": "Thank you!",
+    "alreadyText": "You've already shared your feedback this session."
+  },
   "footer": {
     "tagline": "Fashion & accessories for the whole family.",
     "contact": "Contact us",

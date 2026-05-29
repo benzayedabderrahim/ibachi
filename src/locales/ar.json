@@ -40,6 +40,21 @@
     "searchPlaceholder": "ابحث عن منتج...",
     "noResults": "لا توجد نتائج لـ « {{query}} »."
   },
+  "feedback": {
+    "title": "آراء عملائنا",
+    "subtitle": "آراؤكم تلهمنا — شاركونا تجربتكم مع IbaChic.",
+    "formTitle": "اترك رأيك",
+    "namePlaceholder": "اسمك",
+    "messagePlaceholder": "رسالتك...",
+    "submit": "إرسال",
+    "sending": "جارٍ الإرسال...",
+    "thanks": "شكرًا على رأيك!",
+    "error": "تعذّر إرسال رأيك. حاول مرة أخرى.",
+    "empty": "كن أول من يشارك رأيه!",
+    "charsLeft": "{{n}} حرفًا متبقٍ",
+    "alreadyTitle": "شكرًا!",
+    "alreadyText": "لقد شاركت رأيك خلال هذه الجلسة بالفعل."
+  },
   "footer": {
     "tagline": "أزياء وإكسسوارات لكل أفراد العائلة.",
     "contact": "اتصل بنا",

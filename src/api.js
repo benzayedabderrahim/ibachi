@@ -15,6 +15,17 @@ export function buildWhatsappLink(message) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
 }
 
+// ---------- Customer feedback (public) ----------
+export async function fetchFeedbacks() {
+  const { data } = await client.get('/feedbacks/')
+  return data.results ?? data
+}
+
+export async function createFeedback(name_user, description) {
+  const { data } = await client.post('/feedbacks/', { name_user, description })
+  return data
+}
+
 // ---------- Admin (secret page) ----------
 const TOKEN_KEY = 'iba_admin_token'
 

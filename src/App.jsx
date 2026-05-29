@@ -4,6 +4,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import { ADMIN_PATH, CATEGORIES } from './config'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import FeedbackSection from './components/FeedbackSection'
 import Home from './pages/Home'
 import Category from './pages/Category'
 import Admin from './pages/Admin'
@@ -29,6 +30,7 @@ function StoreLayout() {
           <Route path="*" element={<Home />} />
         </Routes>
       </main>
+      <FeedbackSection />
       <Footer />
     </>
   )
