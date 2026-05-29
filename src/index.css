@@ -264,6 +264,20 @@ h4 {
   flex-shrink: 0;
 }
 
+.btn-whatsapp.muted {
+  background: var(--line);
+  color: var(--muted);
+  pointer-events: none;
+  box-shadow: none;
+  filter: grayscale(0.5);
+  opacity: 0.75;
+}
+
+.btn-whatsapp.muted:hover {
+  background: var(--line);
+  transform: none;
+}
+
 .btn-whatsapp:hover {
   background: var(--wa-dark);
   transform: translateY(-1px);
@@ -542,11 +556,49 @@ button.card-media {
   position: absolute;
   top: 12px;
   inset-inline-start: 12px;
-  background: rgba(16, 24, 43, 0.85);
-  color: var(--white);
-  font-size: 12px;
-  padding: 5px 10px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 6px 12px 6px 11px;
   border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(16, 24, 43, 0.18);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  white-space: nowrap;
+}
+
+.card-badge.in-stock {
+  background: linear-gradient(135deg, #1ea65b, #16a34a 60%, #138c3f);
+}
+
+.card-badge.out-stock {
+  background: linear-gradient(135deg, #e23b3b, #c1272d 60%, #9b1c20);
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6);
+  flex-shrink: 0;
+}
+
+.card-badge.in-stock .badge-dot {
+  animation: badge-pulse 2.1s infinite ease-out;
+}
+
+@keyframes badge-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.55); }
+  70%  { box-shadow: 0 0 0 7px rgba(255, 255, 255, 0);   }
+  100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);     }
 }
 
 .card-body {
@@ -1135,6 +1187,91 @@ button.card-media {
 }
 
 .admin-del:hover { background: #f9d7d3; }
+
+/* Quick stock +/- controls inside each product card */
+.admin-stock {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.admin-stock-btn {
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--line);
+  background: var(--cream);
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--navy);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-stock-btn:hover:not(:disabled) {
+  background: var(--gold);
+  color: var(--navy-dark);
+  border-color: var(--gold);
+}
+
+.admin-stock-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.admin-stock-val {
+  min-width: 28px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 14px;
+}
+
+/* Admin list header (title + count) and pagination */
+.admin-list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.admin-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 24px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.admin-pagination button {
+  background: var(--white);
+  border: 1px solid var(--line);
+  color: var(--navy);
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.admin-pagination button:hover:not(:disabled) {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+
+.admin-pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 
 @media (max-width: 600px) {
   .admin-grid { grid-template-columns: 1fr; }

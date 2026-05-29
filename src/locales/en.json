@@ -26,6 +26,8 @@
     "order": "Order on WhatsApp",
     "reference": "Ref",
     "unavailable": "Currently unavailable",
+    "inStock": "In stock",
+    "outOfStock": "Out of stock",
     "currency": "TND",
     "photoLabel": "Product photo",
     "whatsappMessage": "Hello IbaChic! I'm interested in this product: {{name}} (Ref {{mat}}) — {{price}} TND. Is it available?"

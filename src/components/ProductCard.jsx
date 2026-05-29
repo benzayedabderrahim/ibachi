@@ -25,7 +25,13 @@ export default function ProductCard({ product }) {
     ? `${baseMessage}\n\n${t('product.photoLabel')}: ${product.image}`
     : baseMessage
 
-  const soldOut = !product.dispo || product.stock === 0
+  const inStock = (product.stock || 0) > 0
+  const stockBadge = (
+    <span className={`card-badge ${inStock ? 'in-stock' : 'out-stock'}`}>
+      <span className="badge-dot" aria-hidden="true" />
+      {t(inStock ? 'product.inStock' : 'product.unavailable')}
+    </span>
+  )
 
   return (
     <article className="card">
@@ -48,12 +54,12 @@ export default function ProductCard({ product }) {
               />
             </svg>
           </span>
-          {soldOut && <span className="card-badge">{t('product.unavailable')}</span>}
+          {stockBadge}
         </button>
       ) : (
         <div className="card-media">
           <div className="card-media-placeholder">IbaChic</div>
-          {soldOut && <span className="card-badge">{t('product.unavailable')}</span>}
+          {stockBadge}
         </div>
       )}
 
@@ -76,11 +82,12 @@ export default function ProductCard({ product }) {
             {price} <small>{t('product.currency')}</small>
           </span>
           <a
-            className="btn-whatsapp"
+            className={`btn-whatsapp${inStock ? '' : ' muted'}`}
             href={buildWhatsappLink(message)}
             target="_blank"
             rel="noopener noreferrer"
-            aria-disabled={soldOut}
+            aria-disabled={!inStock}
+            tabIndex={inStock ? 0 : -1}
           >
             <svg viewBox="0 0 32 32" width="18" height="18" aria-hidden="true">
               <path

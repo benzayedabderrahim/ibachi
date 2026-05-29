@@ -26,6 +26,8 @@
     "order": "اطلب عبر واتساب",
     "reference": "المرجع",
     "unavailable": "غير متوفر حاليًا",
+    "inStock": "متوفر",
+    "outOfStock": "نفد المخزون",
     "currency": "د.ت",
     "photoLabel": "صورة المنتج",
     "whatsappMessage": "مرحبًا IbaChic! أنا مهتم بهذا المنتج: {{name}} (المرجع {{mat}}) — {{price}} د.ت. هل هو متوفر؟"

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import {
   adminLogin,
@@ -10,6 +10,7 @@ import {
   updateProduct,
 } from '../api'
 import { CATEGORIES } from '../config'
+import SearchBar from '../components/SearchBar'
 
 const CATEGORY_LABELS = {
   women: 'Femmes',
@@ -17,6 +18,8 @@ const CATEGORY_LABELS = {
   kids: 'Enfants',
   accessories: 'Accessoires',
 }
+
+const PAGE_SIZE = 12
 
 const EMPTY_FORM = {
   name: '',
@@ -197,35 +200,60 @@ function ProductForm({ editing, onDone, onCancel }) {
   )
 }
 
-function ProductCards({ products, onEdit, onDelete }) {
+function ProductCards({ products, onEdit, onDelete, onAdjustStock }) {
   return (
-    <div className="admin-list">
-      <h2>Produits existants ({products.length})</h2>
-      <div className="admin-products">
-        {products.map((p) => (
-          <div className="admin-product" key={p.id}>
-            <div className="admin-product-thumb">
-              {p.image ? (
-                <img src={p.image} alt={p.name} loading="lazy" />
-              ) : (
-                <span className="admin-product-noimg">IbaChic</span>
-              )}
-              {!p.dispo && <span className="admin-product-badge">Indisponible</span>}
-            </div>
-            <div className="admin-product-info">
-              <span className="admin-product-ref">{p.mat}</span>
-              <strong>{p.name}</strong>
-              <span className="admin-product-meta">
-                {CATEGORY_LABELS[p.category] || p.category} · {Number(p.price).toFixed(2)} TND · stock {p.stock}
-              </span>
-            </div>
-            <div className="admin-product-actions">
-              <button className="admin-edit" onClick={() => onEdit(p)}>Modifier</button>
-              <button className="admin-del" onClick={() => onDelete(p)}>Supprimer</button>
+    <div className="admin-products">
+      {products.map((p) => (
+        <div className="admin-product" key={p.id}>
+          <div className="admin-product-thumb">
+            {p.image ? (
+              <img src={p.image} alt={p.name} loading="lazy" />
+            ) : (
+              <span className="admin-product-noimg">IbaChic</span>
+            )}
+            {!p.dispo && <span className="admin-product-badge">Indisponible</span>}
+          </div>
+          <div className="admin-product-info">
+            <span className="admin-product-ref">{p.mat}</span>
+            <strong>{p.name}</strong>
+            <span className="admin-product-meta">
+              {CATEGORY_LABELS[p.category] || p.category} · {Number(p.price).toFixed(2)} TND
+            </span>
+            <div className="admin-stock">
+              <span>Stock</span>
+              <button
+                type="button"
+                className="admin-stock-btn"
+                onClick={() => onAdjustStock(p, -1)}
+                disabled={p.stock <= 0}
+                aria-label="Diminuer stock"
+              >−</button>
+              <span className="admin-stock-val">{p.stock}</span>
+              <button
+                type="button"
+                className="admin-stock-btn"
+                onClick={() => onAdjustStock(p, +1)}
+                aria-label="Augmenter stock"
+              >+</button>
             </div>
           </div>
-        ))}
-      </div>
+          <div className="admin-product-actions">
+            <button className="admin-edit" onClick={() => onEdit(p)}>Modifier</button>
+            <button className="admin-del" onClick={() => onDelete(p)}>Supprimer</button>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function Pagination({ page, pageCount, onChange }) {
+  if (pageCount <= 1) return null
+  return (
+    <div className="admin-pagination">
+      <button onClick={() => onChange(page - 1)} disabled={page <= 1}>‹ Précédent</button>
+      <span>Page {page} / {pageCount}</span>
+      <button onClick={() => onChange(page + 1)} disabled={page >= pageCount}>Suivant ›</button>
     </div>
   )
 }
@@ -234,6 +262,8 @@ export default function Admin() {
   const [authed, setAuthed] = useState(Boolean(getToken()))
   const [products, setProducts] = useState([])
   const [editing, setEditing] = useState(null)
+  const [query, setQuery] = useState('')
+  const [page, setPage] = useState(1)
   const formRef = useRef(null)
 
   const loadProducts = useCallback(() => {
@@ -245,6 +275,31 @@ export default function Admin() {
   useEffect(() => {
     if (authed) loadProducts()
   }, [authed, loadProducts])
+
+  // Search across name, description, and reference.
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    if (!q) return products
+    return products.filter((p) =>
+      [p.name, p.description, p.mat]
+        .filter(Boolean)
+        .some((field) => field.toLowerCase().includes(q)),
+    )
+  }, [products, query])
+
+  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
+
+  // Keep the page within bounds whenever the filtered set shrinks.
+  useEffect(() => {
+    if (page > pageCount) setPage(pageCount)
+  }, [page, pageCount])
+
+  // Reset to first page when the search query changes.
+  useEffect(() => {
+    setPage(1)
+  }, [query])
+
+  const pageItems = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
 
   const logout = () => {
     clearToken()
@@ -272,6 +327,18 @@ export default function Admin() {
     }
   }
 
+  const handleAdjustStock = async (product, delta) => {
+    const newStock = Math.max(0, (product.stock || 0) + delta)
+    if (newStock === product.stock) return
+    // Optimistic local update so the +/- feels instant; reload on failure.
+    setProducts((prev) => prev.map((p) => (p.id === product.id ? { ...p, stock: newStock } : p)))
+    try {
+      await updateProduct(product.id, { stock: newStock }, null)
+    } catch {
+      loadProducts()
+    }
+  }
+
   if (!authed) return <LoginScreen onLoggedIn={() => setAuthed(true)} />
 
   return (
@@ -284,7 +351,24 @@ export default function Admin() {
         <div ref={formRef}>
           <ProductForm editing={editing} onDone={handleSaved} onCancel={() => setEditing(null)} />
         </div>
-        <ProductCards products={products} onEdit={handleEdit} onDelete={handleDelete} />
+
+        <div className="admin-list">
+          <div className="admin-list-head">
+            <h2>Produits existants ({filtered.length}{filtered.length !== products.length ? ` / ${products.length}` : ''})</h2>
+          </div>
+          <SearchBar value={query} onChange={setQuery} />
+          {pageItems.length === 0 ? (
+            <p className="grid-message">Aucun produit trouvé.</p>
+          ) : (
+            <ProductCards
+              products={pageItems}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+              onAdjustStock={handleAdjustStock}
+            />
+          )}
+          <Pagination page={page} pageCount={pageCount} onChange={setPage} />
+        </div>
       </div>
     </div>
   )
