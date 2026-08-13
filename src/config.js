@@ -10,7 +10,7 @@ export const CATEGORIES = ['women', 'men', 'kids', 'accessories']
 
 // Secret admin page route. Not linked anywhere in the public UI.
 // Change this value to rename the hidden management URL.
-export const ADMIN_PATH = '/gestion-ibachic'
+export const ADMIN_PATH = '/adm!n/sEc564UrEd/*025/i-b-a-c-g-f-g-sEcUrEd/'
 
 export const LANGUAGES = [
   { code: 'fr', label: 'Français' },
